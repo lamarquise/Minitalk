@@ -1,4 +1,6 @@
 objs
 client
 server
-
+*.swp
+server_sanitize
+server_valgrind

@@ -6,7 +6,7 @@
 /*   By: ericlazo <erlazo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 19:38:06 by ericlazo          #+#    #+#             */
-/*   Updated: 2021/08/11 15:09:15 by ericlazo         ###   ########.fr       */
+/*   Updated: 2021/12/07 08:39:53 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	ft_nlstadd_back(t_nlist **lst, t_nlist *new)
 	return (1);
 }
 
+	// not my normal one from minilib but who cares...
 int	ft_nlstadd_front(t_nlist **lst, t_nlist *new)
 {
 	if (!lst || !new)
@@ -53,13 +54,13 @@ int	ft_nlstadd_front(t_nlist **lst, t_nlist *new)
 	}
 	new->next = *lst;
 	*lst = new;
-	new->index = 0;
+/*	new->index = 0;
 	while (*lst)
 	{
 		++(*lst)->index;
 		(*lst) = (*lst)->next;
 	}
-	return (1);
+*/	return (1);
 }
 
 t_nlist	*ft_nlstnew(void *content, int index)

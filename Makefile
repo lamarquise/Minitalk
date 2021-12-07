@@ -66,7 +66,7 @@ $(CLIENT): $(OBJS_CLIENT)
 	printf "$(_GREEN)\r\33[2K\r$(CLIENT) created  😎\n$(_END)"
 
 $(SERVER): $(OBJS_SERVER)
-	$(CC) $(CFLAGS) $(ALL_INCS) $(OBJS_SERVER) -o $(NAME)
+	$(CC) $(CFLAGS) $(ALL_INCS) $(OBJS_SERVER) -o $(SERVER)
 	printf "$(_GREEN)\r\33[2K\r$(NAME) created  😎\n$(_END)"
 
 
@@ -105,6 +105,24 @@ rebonus: fclean bonus
 .PHONY: all clean fclean re testlc testlp testsc testsp
 
 .SILENT:
+
+
+#### i guess i need segfault tools... ####
+
+testss: $(OBJS_SERVER)
+	$(CC) $(CFLAGS) $(ALL_INCS) $(OBJS_SERVER) -o server_sanitize -g3 -fsanitize=address
+	echo "$(_CYAN)Fsanitize Test ready  😬$(_END)"
+
+testls: $(OBJS_SERVER)
+	$(CC) $(CFLAGS) $(ALL_INCS) $(OBJS_SERVER) -o server_valgrind -g -fsanitize=address
+	echo "$(_CYAN)Valgrind Test ready  😬$(_END)"
+
+
+
+
+
+
+
 
 ##################
 ##    COLORS    ##
