@@ -6,7 +6,7 @@
 /*   By: ericlazo <erlazo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 20:36:48 by ericlazo          #+#    #+#             */
-/*   Updated: 2021/12/07 11:54:38 by me               ###   ########.fr       */
+/*   Updated: 2021/12/07 12:36:14 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,43 @@ int	ft_nlstdel_n_one(t_nlist **lst, int n)
 		return (0);
 	prev = NULL;
 	tmp = *lst;
+	// the case where it's the first one...
+	if (tmp && tmp->index == n)
+	{
+//		printf("nlstdel n one, the case where it's the first one start 1\n");
+		prev = tmp->next;
+//		printf("nlstdel n one, the case where it's the first one start 2, content: |%s|\n", (char*)tmp->content);
+//		ft_scott_free(&(char**)tmp->content, 0); //for some reason it hates this...
+		free(tmp->content);
+//		printf("nlstdel n one, the case where it's the first one start 3\n");
+		free(tmp);
+//		printf("nlstdel n one, the case where it's the first one start 4\n");
+		*lst = prev;
+//		printf("nlstdel n one, the case where it's the first one end\n");
+		return (1);
+	}
 	while (tmp && tmp->index != n) 
 	{
 //		printf("in nlstdel loop\n");
 		prev = tmp;
 		tmp = tmp->next;
 	}
+	if (!tmp)
+		return (0);
 //	printf("post! loop of of nlstdel n one\n");
 	// this is all very poorly thought out...
 	// were is check if tmp exist? cuz do tmp->next!
-	if (prev)
+//	if (prev)
 		prev->next = tmp->next;
-	if (tmp)
-	{
+//	if (tmp)
+//	{
 //		printf("nlstdel one in if there is tmp\n");
-//		ft_scott_free(tmp->content, 0);
-		if (tmp->content)
-			free(tmp->content);
+		ft_scott_free(tmp->content, 0);
+//		if (tmp->content)
+//			free(tmp->content);
 		free(tmp);
 		tmp = NULL;
-	}
+//	printf("nlstdel one in end\n");
+//	}
 	return (1);
 }

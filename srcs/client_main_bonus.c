@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client_main.c                                      :+:      :+:    :+:   */
+/*   client_main_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: me <erlazo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:33:41 by me                #+#    #+#             */
-/*   Updated: 2021/12/07 12:49:18 by me               ###   ########.fr       */
+/*   Updated: 2021/12/07 13:05:03 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@ int	ft_send_bit(char c, int pid)
 	return (1);
 }
 
+
+
+
+	// make a thing useing FORK or something where you can test if
+	// the server is able to handle multiple clients sending parts of
+	// messages all at the same time
+	// i think it is, but make a thing to prove it, if only for the correction
+
+
+
 int	main(int ac, char **av)
 {
 	int		i;
@@ -53,6 +63,11 @@ int	main(int ac, char **av)
 	pid = ft_atoi(av[1]);
 	msg = ft_strdup(av[2]);
 	i = 0;
+	if (!ft_strcmp(msg, "kill server"))
+	{
+		ft_putstr("Killing Server\n");
+		kill(pid, SIGINT);
+	}
 	while (msg[i])
 	{
 //		printf("main sending bits loop\n");

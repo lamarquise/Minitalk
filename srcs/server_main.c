@@ -6,7 +6,7 @@
 /*   By: me <erlazo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:34:55 by me                #+#    #+#             */
-/*   Updated: 2021/12/07 11:03:16 by me               ###   ########.fr       */
+/*   Updated: 2021/12/07 13:05:05 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,7 @@ void	ft_sigusr_handler(int sig, siginfo_t *info, void *unused)
 
 	(void)info;
 	(void)unused;
-//	ft_putnbrnl(sig);
-//	ft_putstr("This was printed cuz you sent a signal to ./server\n");
-
 	tmp = lst;
-
 	while (tmp && tmp->index != info->si_pid)
 	{
 		printf("in linked list loop\n");
@@ -83,23 +79,26 @@ void	ft_sigusr_handler(int sig, siginfo_t *info, void *unused)
 		if (!c)
 		{
 //			printf("end of message, it should print: |%s|\n", (char*)tmp->content);
+	// This could be a bonus...
 			ft_putstr(tmp->content);
 			ft_putchar('\n');
-	//		free(tmp->content);
 //			printf("end of message, pre del n one\n");
 			ft_nlstdel_n_one(&lst, info->si_pid);	
-			printf("end of message, post! del n one\n");
+//			printf("end of message, post! del n one\n");
 			if ((kill(info->si_pid, SIGUSR1) == -1))
 				ft_error_msg_fd("Error, could not send signal back to client\n", 0, 0);
+//			if (lst)
+//				printf("lst in handler print is still a thing!\n");
 		}
 		else
 		{
 			tmp->content = ft_add_char_to_str(c, tmp->content);
 //			printf("we should have added conent... |%s|\n", (char*)tmp->content);
 		}
+//		if (lst)
+//			printf("lst in handler is still a thing!\n");
 		c = 0;
 	}
-//	printf("very end of handler function\n");
 }
 
 int	main(int ac, char **av)

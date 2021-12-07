@@ -4,12 +4,15 @@ CFLAGS		=	-Wall -Werror -Wextra
 
 NAME		=	minitalk
 CLIENT		=	client
+CLIENT_B	=	client_bonus
 SERVER		=	server
 
 DIR_SRCS		=	./srcs/
 
 DIR_CLIENT		=	$(DIR_SRCS)
 SRCS_CLIENT		=	client_main.c \
+
+SRCS_CLIENT_B	=	client_main_bonus.c \
 
 DIR_SERVER		=	$(DIR_SRCS)
 SRCS_SERVER		=	server_main.c \
@@ -43,9 +46,11 @@ DIR_OBJ		=	./objs/
 
 OBJ_MINILIB		=	$(SRCS_MINILIB:.c=.o)
 OBJ_CLIENT		=	$(SRCS_CLIENT:.c=.o) $(OBJ_MINILIB)
+OBJ_CLIENT_B	=	$(SRCS_CLIENT_B:.c=.o) $(OBJ_MINILIB)
 OBJ_SERVER		=	$(SRCS_SERVER:.c=.o) $(OBJ_MINILIB)
 
 OBJS_CLIENT		=	$(addprefix $(DIR_OBJ),$(OBJ_CLIENT))
+OBJS_CLIENT_B	=	$(addprefix $(DIR_OBJ),$(OBJ_CLIENT_B))
 OBJS_SERVER		=	$(addprefix $(DIR_OBJ),$(OBJ_SERVER))
 
 
@@ -56,7 +61,7 @@ OBJS_SERVER		=	$(addprefix $(DIR_OBJ),$(OBJ_SERVER))
 all: $(NAME)
 
 	# we will sort out how to do bonuses later...
-#bonus: $(NAME) $(CHECKER)
+bonus: $(NAME) $(CLIENT_B)
 
 	### EXECUTABLE CREATION ###
 $(NAME): $(CLIENT) $(SERVER)
@@ -64,6 +69,10 @@ $(NAME): $(CLIENT) $(SERVER)
 $(CLIENT): $(OBJS_CLIENT)
 	$(CC) $(CFLAGS) $(ALL_INCS) $(OBJS_CLIENT) -o $(CLIENT)
 	printf "$(_GREEN)\r\33[2K\r$(CLIENT) created  😎\n$(_END)"
+
+$(CLIENT_B): $(OBJS_CLIENT_B)
+	$(CC) $(CFLAGS) $(ALL_INCS) $(OBJS_CLIENT_B) -o $(CLIENT_B)
+	printf "$(_GREEN)\r\33[2K\r$(CLIENT_B) created  😎\n$(_END)"
 
 $(SERVER): $(OBJS_SERVER)
 	$(CC) $(CFLAGS) $(ALL_INCS) $(OBJS_SERVER) -o $(SERVER)
@@ -95,8 +104,8 @@ clean:
 	echo "$(_RED).o Files Deleted  😱$(_END)"
 
 fclean: clean
-	rm -rf $(CLIENT) $(SERVER)
-	echo "$(_RED)$(CLIENT) and $(SERVER) Deleted  😱$(_END)"
+	rm -rf $(CLIENT) $(SERVER) $(CLIENT_B)
+	echo "$(_RED)$(CLIENT), $(SERVER) and $(CLIENT_B) Deleted  😱$(_END)"
 
 re: fclean all
 
