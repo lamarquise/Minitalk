@@ -6,7 +6,7 @@
 /*   By: ericlazo <erlazo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 19:32:43 by ericlazo          #+#    #+#             */
-/*   Updated: 2021/08/11 02:14:50 by ericlazo         ###   ########.fr       */
+/*   Updated: 2021/12/08 17:01:35 by erlazo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_putstr_fd(char const *s, int fd)
 		return ;
 	while ((char)s[a])
 	{
-		write(fd, (void*)&s[a], 1);
+		write(fd, (void *)&s[a], 1);
 		++a;
 	}
 }
