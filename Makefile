@@ -24,6 +24,7 @@ SRCS_SERVER		=	server_main.c \
 DIR_MINILIB		=	./minilib/
 SRCS_MINILIB	=	atoi_funcs.c \
 					big_str_funcs.c \
+					is_funcs.c \
 					ft_split.c \
 					ft_strjoin.c \
 					list_funcs.c \
@@ -116,6 +117,7 @@ rebonus: fclean bonus
 .SILENT:
 
 
+		## Get rid of these...###
 #### i guess i need segfault tools... ####
 
 testss: $(OBJS_SERVER)

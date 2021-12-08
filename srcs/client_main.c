@@ -6,7 +6,7 @@
 /*   By: me <erlazo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:33:41 by me                #+#    #+#             */
-/*   Updated: 2021/12/07 12:49:18 by me               ###   ########.fr       */
+/*   Updated: 2021/12/08 07:46:19 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,16 @@ int	ft_send_bit(char c, int pid)
 	{
 //		printf("in the send bit loop\n");
 		if (c & 1<<i)
-			kill(pid, SIGUSR1);
+		{
+			if ((kill(pid, SIGUSR1)) == -1)
+				return (ft_error_msg_fd("Error, bad PID\n", 0, 0));
+				// Should i say error signal or bad pid?
+		}
 		else
-			kill(pid, SIGUSR2);
+		{
+			if ((kill(pid, SIGUSR2)) == -1)
+				return (ft_error_msg_fd("Error, bad PID\n", 0, 0));
+		}
 		usleep(100);
 		++i;
 	}
@@ -40,39 +47,27 @@ int	main(int ac, char **av)
 {
 	int		i;
 	int		pid;
-	char	*msg;
 	struct sigaction	sa;
 
-	(void)av;
 	if (ac != 3)
 		return (ft_error_msg_fd("Error, expected arguments: <PID> <Message>\n", 0, 0));
 
 	sa.sa_handler = &ft_sigusr_handler;
+	// secure this, nope
 	sigaction(SIGUSR1, &sa, NULL);
 
+	if (!ft_str_isdigit(av[1]))
+		return (ft_error_msg_fd("Error, PID must be a number\n", 0, 0));
+	if (!ft_str_isprint(av[2]))
+		return (ft_error_msg_fd("Error, Message is not fully printable.\n", 0, 0));
 	pid = ft_atoi(av[1]);
-	msg = ft_strdup(av[2]);
 	i = 0;
-	while (msg[i])
+	while (av[2][i])
 	{
-//		printf("main sending bits loop\n");
-		ft_send_bit(msg[i], pid);
+		if (!ft_send_bit(av[2][i], pid))
+			return (0);
 		++i;
 	}
 	ft_send_bit('\0', pid);
-
-	// works but not what we want to do.
-/*	kill(pid, SIGUSR1);
-	usleep(100);
-	kill(pid, SIGUSR2);
-	usleep(100);
-	kill(pid, SIGUSR2);
-	usleep(100);
-	kill(pid, SIGUSR1);
-	usleep(100);
-*/
-//	kill(pid, SIGINT);
-	free(msg);
-
 	return (0);
 }

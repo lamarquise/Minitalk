@@ -6,7 +6,7 @@
 /*   By: ericlazo <erlazo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 19:33:21 by ericlazo          #+#    #+#             */
-/*   Updated: 2021/09/09 19:57:00 by ericlazo         ###   ########.fr       */
+/*   Updated: 2021/12/08 07:25:23 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,5 +145,15 @@ int			ft_print_strtab(char **tab);
 
 char		**ft_split(char const *s, char *set);
 char		*ft_strjoin(char const *s1, char const *s2);
+
+/*
+**		Is Functions
+*/
+
+int			ft_isalnum(int c);
+int			ft_isalpha(int c);
+int			ft_str_isdigit(char *str);
+int			ft_str_isprint(char *str);
+int			ft_isascii(int c);
 
 #endif

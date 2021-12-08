@@ -6,11 +6,33 @@
 /*   By: me <erlazo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:34:55 by me                #+#    #+#             */
-/*   Updated: 2021/12/07 13:05:05 by me               ###   ########.fr       */
+/*   Updated: 2021/12/08 08:52:46 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+// Maybe put this elsewhere...
+int		ft_print_nlist(t_nlist *lst)
+{
+	t_nlist	*tmp;
+	int i;
+
+	if (!lst)
+		return (0);
+	i = 0;
+	tmp = lst;
+	while (tmp)
+	{
+		if (tmp->content)
+			ft_putstr((char *)tmp->content);
+		ft_putchar('\n');
+		tmp = tmp->next;
+		++i;
+	}
+	ft_putnbrnl(i);
+	return (1);
+}
 
 char	*ft_add_char_to_str(char c, char *str)
 {
@@ -53,10 +75,23 @@ void	ft_sigusr_handler(int sig, siginfo_t *info, void *unused)
 	(void)info;
 	(void)unused;
 	tmp = lst;
+
+	printf("in server which cliend sent sig: %d\n", info->si_pid);
+	if (tmp)
+	{
+//		printf("there is a thing in lst, pid: %d\n", tmp->index);
+//		ft_print_nlist(lst);
+	}
+	else
+//		printf("There is nto a thing in lst\n");
+
 	while (tmp && tmp->index != info->si_pid)
 	{
-		printf("in linked list loop\n");
+//		printf("in linked list loop\n");
+//		ft_print_nlist(lst);
 		tmp = tmp->next;
+//		if (!tmp)
+//			printf("end of the loop\n");
 	}
 
 	if (!tmp)
