@@ -6,7 +6,7 @@
 /*   By: me <erlazo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:33:41 by me                #+#    #+#             */
-/*   Updated: 2021/12/08 17:02:41 by erlazo           ###   ########.fr       */
+/*   Updated: 2021/12/08 20:24:21 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	main(int ac, char **av)
 	{
 		ft_putstr("Killing Server\n");
 		kill(ft_atoi(av[1]), SIGINT);
+		return (0);
 	}
 	i = 0;
 	while (av[2][i])

@@ -6,7 +6,7 @@
 /*   By: ericlazo <erlazo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 19:44:54 by ericlazo          #+#    #+#             */
-/*   Updated: 2021/08/31 01:49:04 by ericlazo         ###   ########.fr       */
+/*   Updated: 2021/12/08 20:09:09 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,12 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
-	// move it later...
 char	*ft_strchr(const char *s, int c)
 {
 	int		a;
 	char	*tmp;
 
-	tmp = (char*)s;
+	tmp = (char *)s;
 	a = 0;
 	while (tmp[a] || (tmp[a] == '\0' && (char)c == '\0'))
 	{

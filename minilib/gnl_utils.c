@@ -6,7 +6,7 @@
 /*   By: ericlazo <erlazo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 00:12:55 by ericlazo          #+#    #+#             */
-/*   Updated: 2021/08/11 00:12:58 by ericlazo         ###   ########.fr       */
+/*   Updated: 2021/12/08 20:07:17 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ size_t	ft_sstrlen(const char *s)
 	return (a);
 }
 
-int		ft_sfindchar(char *str, char c)
+int	ft_sfindchar(char *str, char c)
 {
 	int		i;
 
@@ -41,7 +41,7 @@ int		ft_sfindchar(char *str, char c)
 	return (-1);
 }
 
-int		ft_ibzero(void *s, size_t n)
+int	ft_ibzero(void *s, size_t n)
 {
 	unsigned int	a;
 	unsigned char	*str;

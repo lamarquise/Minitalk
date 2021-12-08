@@ -6,7 +6,7 @@
 /*   By: ericlazo <erlazo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 15:09:36 by ericlazo          #+#    #+#             */
-/*   Updated: 2021/08/11 15:13:07 by ericlazo         ###   ########.fr       */
+/*   Updated: 2021/12/08 20:06:13 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ t_ilist	*ft_ilstnew(int num)
 {
 	t_ilist	*elem;
 
-//	return (NULL);
 	elem = (t_ilist *)malloc(sizeof(t_ilist));
 	if (!elem)
 		return (NULL);
@@ -31,7 +30,6 @@ int	ft_ilstadd_back(t_ilist **lst, t_ilist *new)
 
 	if (!lst || !new)
 	{
-		// never need to worry aobut freeing contents of new
 		if (new)
 			free(new);
 		return (0);

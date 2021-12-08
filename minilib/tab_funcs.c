@@ -6,7 +6,7 @@
 /*   By: ericlazo <erlazo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 19:59:16 by ericlazo          #+#    #+#             */
-/*   Updated: 2021/08/31 01:52:58 by ericlazo         ###   ########.fr       */
+/*   Updated: 2021/12/08 20:04:53 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_free_strtab(char **tab)
 {
-	int		a;
+	int	a;
 
 	a = 0;
 	if (!tab || !*tab)
@@ -24,15 +24,13 @@ int	ft_free_strtab(char **tab)
 		ft_scott_free(&(tab[a]), 1);
 		++a;
 	}
-// a possible addition
-// may only exist in Push Swap tho...
 	free(tab);
 	return (1);
 }
 
 int	ft_print_strtab(char **tab)
 {
-	int		a;
+	int	a;
 
 	if (!tab)
 		return (0);

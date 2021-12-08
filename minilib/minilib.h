@@ -6,14 +6,12 @@
 /*   By: ericlazo <erlazo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 19:33:21 by ericlazo          #+#    #+#             */
-/*   Updated: 2021/12/08 07:25:23 by me               ###   ########.fr       */
+/*   Updated: 2021/12/08 20:11:56 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINILIB_H
 # define MINILIB_H
-
-//# include something for something
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -90,7 +88,6 @@ int			ft_ilstadd_back(t_ilist **lst, t_ilist *new);
 int			ft_ilstadd_front(t_ilist **lst, t_ilist *new);
 int			ft_ilstdel_all(t_ilist **lst);
 
-
 /*
 **		Stand Alone nList Funcs
 */
@@ -105,7 +102,6 @@ int			ft_findchar(char *str, char c);
 int			ft_strcmp(const char *s1, const char *s2);
 size_t		ft_strlen(const char *s);
 void		ft_bzero(void *s, size_t n);
-// move later
 char		*ft_strchr(const char *s, int c);
 
 /*
