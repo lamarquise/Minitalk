@@ -6,7 +6,7 @@
 /*   By: me <erlazo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:33:41 by me                #+#    #+#             */
-/*   Updated: 2021/12/08 08:52:44 by me               ###   ########.fr       */
+/*   Updated: 2021/12/08 16:19:52 by erlazo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ int	ft_send_bit(char c, int pid)
 		if (c & 1<<i)
 		{
 			if ((kill(pid, SIGUSR1)) == -1)
-				return (ft_error_msg_fd("Error, bad PID\n", 0, 0));
+				return (ft_error_msg_fd("Error, bad PID U1\n", 0, 0));
 		}
 		else
 		{
 			if ((kill(pid, SIGUSR2)) == -1)
-				return (ft_error_msg_fd("Error, bad PID\n", 0, 0));
+				return (ft_error_msg_fd("Error, bad PID U2\n", 0, 0));
 		}
 		usleep(100);
 		++i;
@@ -91,7 +91,18 @@ int	main(int ac, char **av)
 	j = 0;
 	//while (av[2][i])
 
-	if (!cpid)
+	while (av[2][i])
+	{
+		if (!ft_send_bit(av[2][i], pid))
+			return (0);
+		++i;
+	//	usleep(100);
+	}
+	usleep(5000000);
+	ft_send_bit('\0', pid);
+
+
+/*	if (!cpid)
 	{
 		// child process
 		usleep(200);
@@ -116,6 +127,7 @@ int	main(int ac, char **av)
 		}
 		ft_send_bit('\0', pid);
 	}
+*/
 
 
 

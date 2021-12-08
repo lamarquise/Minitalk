@@ -6,7 +6,7 @@
 /*   By: ericlazo <erlazo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 20:36:48 by ericlazo          #+#    #+#             */
-/*   Updated: 2021/12/08 08:54:10 by me               ###   ########.fr       */
+/*   Updated: 2021/12/08 16:19:54 by erlazo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ int	ft_nlstdel_n_one(t_nlist **lst, int n)
 		return (0);
 	prev = NULL;
 	tmp = *lst;
+	
+	
+	// this might need to be reworked...
+
+
 	// the case where it's the first one...
 	if (tmp && tmp->index == n)
 	{
@@ -68,7 +73,8 @@ int	ft_nlstdel_n_one(t_nlist **lst, int n)
 //	if (tmp)
 //	{
 //		printf("nlstdel one in if there is tmp\n");
-		ft_scott_free(tmp->content, 0);
+		free(tmp->content);
+//		ft_scott_free(tmp->content, 0);
 //		if (tmp->content)
 //			free(tmp->content);
 		free(tmp);
