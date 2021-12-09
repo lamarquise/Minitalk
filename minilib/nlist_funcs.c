@@ -6,7 +6,7 @@
 /*   By: ericlazo <erlazo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 19:38:06 by ericlazo          #+#    #+#             */
-/*   Updated: 2021/12/09 08:02:07 by me               ###   ########.fr       */
+/*   Updated: 2021/12/09 14:46:53 by erlazo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,10 @@ int	ft_nlstdel_all(t_nlist **lst)
 	while (*lst)
 	{
 		tmp = (*lst)->next;
-		free((*lst)->content);
+		if ((*lst)->content)
+			free((*lst)->content);
 		free(*lst);
 		*lst = tmp;
 	}
-	return (1);
+	return (0);
 }
