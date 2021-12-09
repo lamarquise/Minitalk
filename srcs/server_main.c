@@ -6,7 +6,7 @@
 /*   By: me <erlazo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:34:55 by me                #+#    #+#             */
-/*   Updated: 2021/12/08 20:24:09 by me               ###   ########.fr       */
+/*   Updated: 2021/12/09 08:04:21 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_sigusr_handler(int sig, siginfo_t *info, void *unused)
 	if (sig == SIGUSR1)
 		c |= (1 << i);
 	++i;
-	if (i == 8)
+	if (i == 8 && tmp)
 	{
 		i = 0;
 		if (!c)

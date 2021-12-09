@@ -17,10 +17,6 @@ SRCS_CLIENT_B	=	client_main_bonus.c \
 DIR_SERVER		=	$(DIR_SRCS)
 SRCS_SERVER		=	server_main.c \
 
-# we can add shit if do bonus.
-
-	# we may not use everything...
-
 DIR_MINILIB		=	./minilib/
 SRCS_MINILIB	=	atoi_funcs.c \
 					big_str_funcs.c \
@@ -55,17 +51,17 @@ OBJS_CLIENT_B	=	$(addprefix $(DIR_OBJ),$(OBJ_CLIENT_B))
 OBJS_SERVER		=	$(addprefix $(DIR_OBJ),$(OBJ_SERVER))
 
 
-# we can add shit if do bonus
 
 	### Rules ###
 
 all: $(NAME)
 
-	# we will sort out how to do bonuses later...
+$(NAME): $(CLIENT) $(SERVER)
+
 bonus: $(NAME) $(CLIENT_B)
 
+
 	### EXECUTABLE CREATION ###
-$(NAME): $(CLIENT) $(SERVER)
 
 $(CLIENT): $(OBJS_CLIENT)
 	$(CC) $(CFLAGS) $(ALL_INCS) $(OBJS_CLIENT) -o $(CLIENT)
@@ -77,17 +73,12 @@ $(CLIENT_B): $(OBJS_CLIENT_B)
 
 $(SERVER): $(OBJS_SERVER)
 	$(CC) $(CFLAGS) $(ALL_INCS) $(OBJS_SERVER) -o $(SERVER)
-	printf "$(_GREEN)\r\33[2K\r$(NAME) created  😎\n$(_END)"
+	printf "$(_GREEN)\r\33[2K\r$(SERVER) created  😎\n$(_END)"
 
 
 	### BINARY CREATION ###
 
-$(DIR_OBJ)%.o: $(DIR_CLIENT)%.c
-	mkdir -p $(DIR_OBJ)
-	$(CC) $(CFLAGS) $(ALL_INCS) -c $< -o $@
-	printf "$(_CYAN)\r\33[2K\rCompling $@$(_END)"
-
-$(DIR_OBJ)%.o: $(DIR_SERVER)%.c
+$(DIR_OBJ)%.o: $(DIR_SRCS)%.c
 	mkdir -p $(DIR_OBJ)
 	$(CC) $(CFLAGS) $(ALL_INCS) -c $< -o $@
 	printf "$(_CYAN)\r\33[2K\rCompling $@$(_END)"
@@ -115,25 +106,6 @@ rebonus: fclean bonus
 .PHONY: all clean fclean re testlc testlp testsc testsp
 
 .SILENT:
-
-
-		## Get rid of these...###
-#### i guess i need segfault tools... ####
-
-testss: $(OBJS_SERVER)
-	$(CC) $(CFLAGS) $(ALL_INCS) $(OBJS_SERVER) -o server_sanitize -g3 -fsanitize=address
-	echo "$(_CYAN)Fsanitize Test ready  😬$(_END)"
-
-testls: $(OBJS_SERVER)
-	$(CC) $(CFLAGS) $(ALL_INCS) $(OBJS_SERVER) -o server_valgrind -g -fsanitize=address
-	echo "$(_CYAN)Valgrind Test ready  😬$(_END)"
-
-
-
-
-
-
-
 
 ##################
 ##    COLORS    ##

@@ -6,7 +6,7 @@
 /*   By: ericlazo <erlazo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 19:38:06 by ericlazo          #+#    #+#             */
-/*   Updated: 2021/12/08 20:10:08 by me               ###   ########.fr       */
+/*   Updated: 2021/12/09 08:02:07 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ t_nlist	*ft_nlstnew(void *content, int index)
 		return (NULL);
 	if (!content)
 		elem->content = NULL;
-	elem->content = content;
+	else
+		elem->content = content;
 	elem->index = index;
 	elem->next = NULL;
 	return (elem);

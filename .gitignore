@@ -1,6 +1,7 @@
 objs
 client
 server
+client_bonus
 *.swp
 server_sanitize
 server_valgrind
