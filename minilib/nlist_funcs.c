@@ -6,7 +6,7 @@
 /*   By: ericlazo <erlazo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 19:38:06 by ericlazo          #+#    #+#             */
-/*   Updated: 2021/12/09 14:46:53 by erlazo           ###   ########.fr       */
+/*   Updated: 2021/12/10 09:19:58 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ t_nlist	*ft_nlstnew(void *content, int index)
 	return (elem);
 }
 
-int	ft_nlstdel_all(t_nlist **lst)
+void	ft_nlstdel_all(t_nlist **lst)
 {
 	t_nlist	*tmp;
 
 	if (!lst)
-		return (0);
+		exit(0);
 	tmp = *lst;
 	while (*lst)
 	{
@@ -84,5 +84,5 @@ int	ft_nlstdel_all(t_nlist **lst)
 		free(*lst);
 		*lst = tmp;
 	}
-	return (0);
+	exit(0);
 }

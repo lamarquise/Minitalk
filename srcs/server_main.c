@@ -6,7 +6,7 @@
 /*   By: me <erlazo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:34:55 by me                #+#    #+#             */
-/*   Updated: 2021/12/09 14:46:43 by erlazo           ###   ########.fr       */
+/*   Updated: 2021/12/10 09:19:12 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,25 @@
 // REMOVE THIS!!!!!!!
 int	thing = 0;
 
-char	*ft_add_char_to_str(char c, char *str, t_nlist **lst)
+char	*ft_add_char_to_str(char c, char *str, t_nlist **lst, int pid)
 {
 	int		i;
-	int		len;
 	char	*ret;
 
+	// remove!!!!
 	++thing;
-/*	if (thing > 2)
+
+	if (thing > 9)
 	{
+		kill(pid, SIGUSR2);
 		ft_nlstdel_all(lst);
-		return (NULL);
 	}
-*/	if (!str)
-		len = 0;
-	else
-		len = ft_strlen(str);
 	i = 0;
-	ret = malloc(sizeof(char) * (len + 2));
+	ret = malloc(sizeof(char) * (ft_strlen(str) + 2));
 	if (!ret)
 	{
-		// maybe i should just 
-		// free(str);
-		// or ft_scott_free(&str, 0);
-		// not even tho, cuz at the end it all gets freed...
-		//
-		// NO i don't think i should free the whole linked list, just ret! wait no not ret...
-		// Yea ok i think delall is right...
-
-		// keep the same setup you have but use exit after free everything !!!!
-		// i think...
+		kill(pid, SIGUSR2);
 		ft_nlstdel_all(lst);
-		return (NULL);
 	}
 	while (str && str[i])
 	{
@@ -57,44 +44,9 @@ char	*ft_add_char_to_str(char c, char *str, t_nlist **lst)
 	ret[i] = c;
 	++i;
 	ret[i] = '\0';
-//	*str = ret;
 	return (ret);
-//	return (1);
 }
-/*
-int	ft_add_char_to_str(char c, char **str, t_nlist **lst)
-{
-	int		i;
-	int		len;
-	char	*ret;
 
-	++thing;
-	if (thing > 2)
-		return (ft_nlstdel_all(lst));
-	if (!str)
-		return (ft_nlstdel_all(lst));
-	if (!*str)
-		len = 0;
-	else
-		len = ft_strlen(*str);
-	i = 0;
-	ret = malloc(sizeof(char) * (len + 2));
-	if (!ret)
-		return (ft_nlstdel_all(lst));
-	while (*str && (*str)[i])
-	{
-		ret[i] = (*str)[i];
-		++i;
-	}
-	ft_scott_free(str, 0);
-	ret[i] = c;
-	++i;
-	ret[i] = '\0';
-	*str = ret;
-//	return (ret);
-	return (1);
-}
-*/
 t_nlist	*ft_get_right_elem(t_nlist *lst, int pid)
 {
 	t_nlist	*tmp;
@@ -120,13 +72,21 @@ t_nlist	*ft_right_elem(t_nlist **lst, int pid)
 		if (!tmp)
 		{
 			tmp = ft_nlstnew(NULL, pid);
-			ft_nlstadd_front(lst, tmp);
+			if (!ft_nlstadd_front(lst, tmp))
+			{
+				kill(pid, SIGUSR2);
+				ft_nlstdel_all(lst);
+			}
 		}
 	}
 	else
 	{
 		tmp = ft_nlstnew(NULL, pid);
-		ft_nlstadd_front(lst, tmp);
+		if (!ft_nlstadd_front(lst, tmp))
+		{
+			kill(pid, SIGUSR2);
+			ft_nlstdel_all(lst);
+		}
 	}
 	return (tmp);
 }
@@ -155,9 +115,7 @@ void	ft_sigusr_handler(int sig, siginfo_t *info, void *unused)
 				ft_error_msg_fd("Failed to send signal back to client\n", 0, 0);
 		}
 		else
-			tmp->content = ft_add_char_to_str(c, tmp->content, &lst);
-	//	else if (!ft_add_char_to_str(c, (char **)&(tmp->content), &lst))
-	//		return ;
+			tmp->content = ft_add_char_to_str(c, tmp->content, &lst, info->si_pid);
 		c = 0;
 	}
 }
