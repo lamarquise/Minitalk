@@ -6,7 +6,7 @@
 /*   By: me <erlazo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:33:41 by me                #+#    #+#             */
-/*   Updated: 2021/12/10 09:19:16 by me               ###   ########.fr       */
+/*   Updated: 2021/12/10 12:47:06 by erlazo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_error_handler(int sig)
 {
 	(void)sig;
 	ft_putstr("Server Error\n");
-	exit(0);		// do i want this?
+	exit(0);
 }
 
 void	ft_confirmation_handler(int sig)
@@ -51,7 +51,6 @@ int	ft_send_bit(char c, int pid)
 int	main(int ac, char **av)
 {
 	int					i;
-	int					pid;
 	struct sigaction	s1;
 	struct sigaction	s2;
 
@@ -65,15 +64,14 @@ int	main(int ac, char **av)
 		return (ft_error_msg_fd("Error, PID must be a number\n", 0, 0));
 	if (!ft_str_isprint(av[2]))
 		return (ft_error_msg_fd("Error, Message is not printable.\n", 0, 0));
-	pid = ft_atoi(av[1]);
 	i = 0;
 	while (av[2][i])
 	{
-		if (!ft_send_bit(av[2][i], pid))
+		if (!ft_send_bit(av[2][i], ft_atoi(av[1])))
 			return (0);
 		++i;
 	}
 	usleep(5000000);
-	ft_send_bit('\0', pid);
+	ft_send_bit('\0', ft_atoi(av[1]));
 	return (0);
 }

@@ -6,11 +6,11 @@
 /*   By: ericlazo <erlazo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 19:38:06 by ericlazo          #+#    #+#             */
-/*   Updated: 2021/12/10 09:19:58 by me               ###   ########.fr       */
+/*   Updated: 2021/12/10 12:54:25 by erlazo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minilib.h"
+#include "minitalk.h"
 
 int	ft_nlstadd_back(t_nlist **lst, t_nlist *new)
 {
@@ -69,10 +69,11 @@ t_nlist	*ft_nlstnew(void *content, int index)
 	return (elem);
 }
 
-void	ft_nlstdel_all(t_nlist **lst)
+void	ft_nlstdel_all(t_nlist **lst, int pid)
 {
 	t_nlist	*tmp;
 
+	kill(pid, SIGUSR2);
 	if (!lst)
 		exit(0);
 	tmp = *lst;

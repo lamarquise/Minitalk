@@ -6,7 +6,7 @@
 /*   By: me <erlazo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:33:41 by me                #+#    #+#             */
-/*   Updated: 2021/12/10 09:12:41 by me               ###   ########.fr       */
+/*   Updated: 2021/12/10 13:01:02 by erlazo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_error_handler(int sig)
 {
 	(void)sig;
 	ft_putstr("Server Error\n");
-	exit(0);		// do i want this?
+	exit(0);
 }
 
 void	ft_confirmation_handler(int sig)

@@ -6,35 +6,21 @@
 /*   By: me <erlazo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 03:34:55 by me                #+#    #+#             */
-/*   Updated: 2021/12/10 09:19:12 by me               ###   ########.fr       */
+/*   Updated: 2021/12/10 12:56:55 by erlazo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-// REMOVE THIS!!!!!!!
-int	thing = 0;
-
-char	*ft_add_char_to_str(char c, char *str, t_nlist **lst, int pid)
+char	*add_char_to_str(char c, char *str, t_nlist **lst, int pid)
 {
 	int		i;
 	char	*ret;
 
-	// remove!!!!
-	++thing;
-
-	if (thing > 9)
-	{
-		kill(pid, SIGUSR2);
-		ft_nlstdel_all(lst);
-	}
 	i = 0;
 	ret = malloc(sizeof(char) * (ft_strlen(str) + 2));
 	if (!ret)
-	{
-		kill(pid, SIGUSR2);
-		ft_nlstdel_all(lst);
-	}
+		ft_nlstdel_all(lst, pid);
 	while (str && str[i])
 	{
 		ret[i] = str[i];
@@ -73,20 +59,14 @@ t_nlist	*ft_right_elem(t_nlist **lst, int pid)
 		{
 			tmp = ft_nlstnew(NULL, pid);
 			if (!ft_nlstadd_front(lst, tmp))
-			{
-				kill(pid, SIGUSR2);
-				ft_nlstdel_all(lst);
-			}
+				ft_nlstdel_all(lst, pid);
 		}
 	}
 	else
 	{
 		tmp = ft_nlstnew(NULL, pid);
 		if (!ft_nlstadd_front(lst, tmp))
-		{
-			kill(pid, SIGUSR2);
-			ft_nlstdel_all(lst);
-		}
+			ft_nlstdel_all(lst, pid);
 	}
 	return (tmp);
 }
@@ -102,20 +82,20 @@ void	ft_sigusr_handler(int sig, siginfo_t *info, void *unused)
 	tmp = ft_right_elem(&lst, info->si_pid);
 	if (sig == SIGUSR1)
 		c |= (1 << i);
-	++i;
-	if (i == 8 && tmp)
+	if (++i == 8 && tmp)
 	{
 		i = 0;
 		if (!c)
 		{
 			ft_putstr(tmp->content);
 			ft_putchar('\n');
-			ft_nlstdel_n_one(&lst, info->si_pid);
+			if (!ft_nlstdel_n_one(&lst, info->si_pid))
+				ft_nlstdel_all(&lst, info->si_pid);
 			if ((kill(info->si_pid, SIGUSR1) == -1))
 				ft_error_msg_fd("Failed to send signal back to client\n", 0, 0);
 		}
 		else
-			tmp->content = ft_add_char_to_str(c, tmp->content, &lst, info->si_pid);
+			tmp->content = add_char_to_str(c, tmp->content, &lst, info->si_pid);
 		c = 0;
 	}
 }

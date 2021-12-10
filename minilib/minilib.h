@@ -6,7 +6,7 @@
 /*   By: ericlazo <erlazo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 19:33:21 by ericlazo          #+#    #+#             */
-/*   Updated: 2021/12/10 09:19:22 by me               ###   ########.fr       */
+/*   Updated: 2021/12/10 12:54:29 by erlazo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void		ft_print_elem(t_list *elem);
 int			ft_nlstadd_back(t_nlist **lst, t_nlist *new);
 int			ft_nlstadd_front(t_nlist **lst, t_nlist *new);
 t_nlist		*ft_nlstnew(void *content, int index);
-void		ft_nlstdel_all(t_nlist **lst);
+void		ft_nlstdel_all(t_nlist **lst, int pid);
 
 /*
 **		iList Funcs
